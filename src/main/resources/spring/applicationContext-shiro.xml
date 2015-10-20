@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd ">
+    <!-- Shiro 的Web过滤器 -->
+    <!--1、与web.xml对应的bean-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <!-- 如果没有认证将要跳转的登陆地址，http可访问的url，如果不在表单认证过虑器FormAuthenticationFilter中指定此地址就为身份认证地址 -->
+        <property name="loginUrl" value="/login" />
+        <!-- 没有权限跳转的地址 -->
+        <property name="unauthorizedUrl" value="/pages/jsp/refuse.jsp" />
+        <!--过滤定义，从上而下，蒋匿名的anon放最下面-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--静态资源通过-->
+                /js/** anon
+                /images/** anon
+                /styles/** anon
+
+                <!--表示所有请求url必须通过认证-->
+                /**=  authc
+                <!--请求logout，shrio擦除sssion-->
+                /logout=logout
+                <!--表示所有url都可以通过-->
+                <!-- /**  anon-->
+            </value>
+        </property>
+    </bean>
+
+    <!-- 2、安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRealm" />
+    </bean>
+    <!--3、realm-->
+    <!-- Shiro配置,继承自AuthorizingRealm的自定义Realm (解决初始化时的依赖循环问题，通过这里向realm中注入userservice实现)-->
+    <bean id="userRealm" class="com.hh.shiro.CustomRealm" >
+        <property name="authorizationCacheName" value="authorizationcache" />
+    </bean>
+</beans>

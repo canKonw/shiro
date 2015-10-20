@@ -1,0 +1,21 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- =================================全局配置参数=============================== -->
+    <settings>
+        <!-- 延迟加载总开关 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <!-- 设置按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false" />
+        <!-- 二级缓存总开关 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <!--===============================加载mapper====================================-->
+    <mappers>
+        <!--1:通过resource路径导入xml映射（idea必须在resource文件下面）-->
+        <mapper  resource="mapper/ItemsMapper.xml"/>
+        <mapper  resource="mapper/SysUserMapper.xml"/>
+        <mapper  resource="mapper/SysPermissionMapper.xml"/>
+    </mappers>
+</configuration>
