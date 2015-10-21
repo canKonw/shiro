@@ -1,27 +1,35 @@
 package entity;
 
-import java.util.Date;
-
 /**
- * Created by huhao on 15-10-20.
+ * Created by hh on 15-10-21.
  */
 public class SysUser {
-    private Integer id;
+    private String id;
+
+    private String userCode;
 
     private String userName;
 
-    private Date birthday;
+    private String password;
 
-    private String sex;
+    private String salt;
 
-    private String address;
+    private String locked;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     public String getUserName() {
@@ -32,27 +40,27 @@ public class SysUser {
         this.userName = userName;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getSex() {
-        return sex;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocked() {
+        return locked;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLocked(String locked) {
+        this.locked = locked;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ycy.mapper.SysUserMapper" >
+<mapper namespace="SysUserMapper" >
   <resultMap id="BaseResultMap" type="com.ycy.model.SysUser" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="usercode" property="usercode" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     id, usercode, username, password, salt, locked
   </sql>
   <!--根据用户名查询系统用户-->
-  <select id="getSysUserByUserCode" resultMap="BaseResultMap" parameterType="map" >
+  <select id="getSysUserByCode" resultMap="BaseResultMap" parameterType="map" >
     select
     <include refid="Base_Column_List" />
     from sys_user
