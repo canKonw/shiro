@@ -49,6 +49,11 @@
           <version>1.8.6</version>
       </dependency>
       <!--log4j官方推荐jar-->
+      <dependency><!--log4j日志答应-->
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+          <version>1.2.17</version>
+      </dependency>
       <dependency>
           <groupId>org.apache.logging.log4j</groupId>
           <artifactId>log4j-api</artifactId>
