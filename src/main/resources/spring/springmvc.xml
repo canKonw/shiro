@@ -20,16 +20,25 @@
     <!--========================================拦截器mvc:interceptors============================================-->
     <!--多个拦截  顺序执行-->
     <mvc:interceptors>
+        <!--判断用户是否登录-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hh.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
         <!---用户授权权限拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.hh.interceptor.SysPermissionInterceptor"></bean>
         </mvc:interceptor>
+
     </mvc:interceptors>
     <!--组件扫描-->
     <context:component-scan base-package="com.hh"></context:component-scan>
+    <!--定义统一异常处理  抛出异常要进行的处理-->
+    <bean id="CustomExceptionResolver" class="com.hh.Exception.CustomExceptionResolver"/>
     <!--注解驱动-->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven><!--对应下面的转化器-->
+
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
