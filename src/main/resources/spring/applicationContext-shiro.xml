@@ -18,7 +18,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
         <!-- 如果没有认证将要跳转的登陆地址，http可访问的url，如果不在表单认证过虑器FormAuthenticationFilter中指定此地址就为身份认证地址 -->
-        <property name="loginUrl" value="/login" />
+        <property name="loginUrl" value="/loginController/login" />
         <!-- 没有权限跳转的地址 -->
         <property name="unauthorizedUrl" value="/pages/jsp/refuse.jsp" />
         <!--过滤定义，从上而下，蒋匿名的anon放最下面-->
