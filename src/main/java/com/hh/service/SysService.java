@@ -3,12 +3,11 @@ package com.hh.service;
 import com.hh.Exception.CustomException;
 import com.hh.dao.SysPermissionDao;
 import com.hh.dao.SysUserDao;
-import com.hh.dao.UserDao;
 import com.hh.util.Md5Util;
-import entity.ActiveUser;
-import entity.SysPermission;
-import entity.SysUser;
-import entity.User;
+import com.hh.entity.ActiveUser;
+import com.hh.entity.SysPermission;
+import com.hh.entity.SysUser;
+import com.hh.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

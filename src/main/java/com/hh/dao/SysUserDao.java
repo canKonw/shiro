@@ -1,6 +1,6 @@
 package com.hh.dao;
 
-import entity.SysUser;
+import com.hh.entity.SysUser;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -1,6 +1,6 @@
 package com.hh.dao;
 
-import entity.SysPermission;
+import com.hh.entity.SysPermission;
 
 import java.util.List;
 

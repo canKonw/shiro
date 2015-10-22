@@ -1,4 +1,4 @@
-package entity;
+package com.hh.entity;
 
 /**
  * Created by hh on 15-10-21.

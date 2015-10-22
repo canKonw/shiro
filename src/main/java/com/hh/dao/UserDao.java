@@ -1,10 +1,7 @@
 package com.hh.dao;
 
-import entity.User;
+import com.hh.entity.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import javax.jnlp.UnavailableServiceException;
 
 /**
  * Created by hh on 15-10-21.
