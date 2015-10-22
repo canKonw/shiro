@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ycy.mapper.ItemsMapper">
-
-    <select id="getItemsById" parameterType="map"
-            resultType="com.ycy.dto.ItemsCustom">
+<mapper namespace="ItemsMapper">
+   <!-- <select id="getItemsById" parameterType="java.util.Map" resultType="com.hh.dto.ItemsCustom">
         SELECT  * from items WHERE  id=#{id}
     </select>
 
-    <select id="findtemsList" parameterType="com.ycy.dto.ItemsCustom"
-            resultType="com.ycy.dto.ItemsCustom">
+    <select id="findtemsList" parameterType="com.hh.dto.ItemsCustom"  resultType="com.hh.dto.ItemsCustom">
         SELECT  * from items
     </select>
 
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ycy.dto.ItemsCustom" >
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hh.dto.ItemsCustom" >
         update items t
         set t.name = #{name,jdbcType=VARCHAR},
         t.price = #{price,jdbcType=REAL},
@@ -20,5 +17,5 @@
         t.createtime = #{createtime,jdbcType=TIMESTAMP},
         t.detail = #{detail,jdbcType=LONGVARCHAR}
         where t.id = #{id,jdbcType=INTEGER}
-    </update>
+    </update>-->
 </mapper>

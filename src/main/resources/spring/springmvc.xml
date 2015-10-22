@@ -16,8 +16,16 @@
     <!--========================================静态资源==============================================-->
     <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
     <mvc:resources mapping="/images/**" location="/images/"></mvc:resources><!--访问images.xxx的时候从/images/路径下面获得数据-->
-    <mvc:resources mapping="/style/**" location="/stype/"></mvc:resources>
+    <mvc:resources mapping="/style/**" location="/styles/"></mvc:resources>
     <!--========================================拦截器mvc:interceptors============================================-->
+    <!--多个拦截  顺序执行-->
+    <mvc:interceptors>
+        <!---用户授权权限拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hh.interceptor.SysPermissionInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!--组件扫描-->
     <context:component-scan base-package="com.hh"></context:component-scan>
     <!--注解驱动-->

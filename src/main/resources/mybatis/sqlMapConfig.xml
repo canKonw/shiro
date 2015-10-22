@@ -12,10 +12,10 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
     <!--===============================加载mapper====================================-->
-    <mappers>
-        <!--1:通过resource路径导入xml映射（idea必须在resource文件下面）-->
+  <!--  <mappers>
+        &lt;!&ndash;1:通过resource路径导入xml映射（idea必须在resource文件下面）&ndash;&gt;
         <mapper  resource="mapper/ItemsMapper.xml"/>
         <mapper  resource="mapper/SysUserMapper.xml"/>
         <mapper  resource="mapper/SysPermissionMapper.xml"/>
-    </mappers>
+    </mappers>-->
 </configuration>
