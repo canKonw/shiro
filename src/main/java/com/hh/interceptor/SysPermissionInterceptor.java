@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 15-10-21.
- * 系统权限拦截
+ * 系统权限拦截   一定要继承HandlerInterceptor
  */
 public class SysPermissionInterceptor implements HandlerInterceptor {
   private Logger logger = Logger.getLogger(SysPermissionInterceptor.class);
@@ -24,8 +24,7 @@ public class SysPermissionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
        String url   =request.getRequestURI();
-        logger.error("-----url:"+url);
-
+        logger.error("-----------SysPermissionInterceptorpre------------Handle");
         /*************************************************匿名地址**********************************************/
         //获得配置中的匿名url
         List<String> open_urls = ResourcesUtil.getkeyList("config/anonymousURL");
@@ -47,10 +46,10 @@ public class SysPermissionInterceptor implements HandlerInterceptor {
         HttpSession session =request.getSession();
         ActiveUser activeUser = (ActiveUser)session.getAttribute("activeUser");
         List<SysPermission> sysPermissionList = activeUser.getPermissions();
+        logger.error("---sysPermissionList:"+sysPermissionList.size());
         for(SysPermission sysPermission:sysPermissionList){
             String permisssion_url = sysPermission.getUrl();
-            logger.error("-----perminssion_url:"+permisssion_url);
-            if(url.endsWith(".css") || url.endsWith(".jsg") || url.endsWith(".js")){
+            if(url.endsWith(".css") || url.endsWith(".jpg") || url.endsWith(".js")){
                 return  true;
             }else{
                 if(url.indexOf(permisssion_url)>0){
@@ -76,7 +75,7 @@ public class SysPermissionInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
-           logger.error("-----------:postHandle");
+           logger.error("-----------SysPermissionInterceptorpre------------postHandle");
     }
 
     /**
@@ -91,7 +90,7 @@ public class SysPermissionInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
-        logger.error("-----------:afterCompletion");
+        logger.error("-----------SysPermissionInterceptorpre------------afterCompletion");
 
     }
 }
