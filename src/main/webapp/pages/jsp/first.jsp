@@ -48,7 +48,7 @@
 
 		$('#tabs').tabs('add', {
 			title : '欢迎使用',
-			content : createFrame('${baseurl}welcome.jsp')
+			content : createFrame('${baseurl}welcome')
 		}).tabs({
 			//当重新选中tab时将ifram的内容重新加载一遍
 			onSelect : tabOnSelect
@@ -84,10 +84,10 @@
 
 <BODY style="overflow-y: hidden;" class="easyui-layout" scroll="no" >
 	<DIV
-		style='background: url("images/layout-browser-hd-bg.gif") repeat-x center 50% rgb(127, 153, 190); height: 30px; color: rgb(255, 255, 255); line-height: 20px; overflow: hidden; font-family: Verdana, 微软雅黑, 黑体;'
+		style='background: url("${baseurl}images/layout-browser-hd-bg.gif") repeat-x center 50% rgb(127, 153, 190); height: 30px; color: rgb(255, 255, 255); line-height: 20px; overflow: hidden; font-family: Verdana, 微软雅黑, 黑体;'
 		border="false" split="true" region="north">
 		<SPAN style="padding-right: 20px; float: right;" class="head">
-			欢迎当前用户：${activeUser.username}&nbsp;&nbsp;
+			欢迎当前用户：${activeUser.userName}&nbsp;&nbsp;
 			<A href=javascript:showhelp()>使用帮助</A>
 			&nbsp;&nbsp;
 			<A title='修改密码' ref='modifypwd' href="#" rel='${baseurl}user/updatepwd.action' icon='icon-null' id="modifypwd" >修改密码</A>
@@ -95,7 +95,7 @@
 			<A id="loginOut" href=javascript:logout()>退出系统</A>
 
 		</SPAN> <SPAN style="padding-left: 10px; font-size: 16px;"><IMG
-			align="absmiddle" src="images/blocks.gif" width="20" height="20">
+			align="absmiddle" src="${baseurl}images/blocks.gif" width="20" height="20">
 			shrio权限系统</SPAN> <SPAN style="padding-left: 15px;" id="News"></SPAN>
 	</DIV>
 
