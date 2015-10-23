@@ -22,7 +22,7 @@ public class Md5Util {
      * @param inStr
      * @return 返回32位md5码
      */
-    public static String md5Encode(String inStr) throws Exception {
+    public static String md5Encode(String inStr)  {
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -31,8 +31,13 @@ public class Md5Util {
             e.printStackTrace();
             return "";
         }
+        byte[] byteArray = null;
+        try {
+            byteArray = inStr.getBytes("UTF-8");
+        }catch (Exception e){
+           return "";
+        }
 
-        byte[] byteArray = inStr.getBytes("UTF-8");
         byte[] md5Bytes = md5.digest(byteArray);
         StringBuffer hexValue = new StringBuffer();
         for (int i = 0; i < md5Bytes.length; i++) {
