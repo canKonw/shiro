@@ -17,8 +17,8 @@
 	</script>
 </head>
 <body>
-当前用户：${username }
-<c:if test="${username!=null }">
+当前用户：${userName }
+<c:if test="${userName!=null }">
 	<a href="${pageContext.request.contextPath }/logout">退出</a>
 </c:if>
 <form name="itemsForm" action="${pageContext.request.contextPath }/items/queryItem" method="post">
@@ -49,11 +49,11 @@
 			<td><input type="checkbox" name="delete_id" value="${item.id}"/></td>
 			<td>${item.name}</td>
 			<td>${item.price}</td>
-				<td><fmt:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${item.detail}</td>
-			<shiro:hasPermission name="item:update">
+			<%--<shiro:hasPermission name="item:update">--%>
 			<td><a href="${pageContext.request.contextPath }/items/editItems?id=${item.id}">修改</a></td>
-			</shiro:hasPermission>
+			<%--</shiro:hasPermission>--%>
 			<td><a href="${pageContext.request.contextPath }/items/viewItems/${item.id}">查询商品信息</a></td>
 
 		</tr>
