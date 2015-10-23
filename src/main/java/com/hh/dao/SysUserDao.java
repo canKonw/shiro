@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public class SysUserDao  extends BaseDao{
 
     public SysUser getSysUserByCode(String code){
-      return  (SysUser)this.selectOne("SysUserMapper",code);
+      return  (SysUser)this.selectOne("SysUserMapper.getSysUserByCode",code);
     }
 }

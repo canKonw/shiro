@@ -27,7 +27,7 @@ public class SysPermission implements Serializable{
     /**
      *权限代码字符串
      */
-    private String percode;
+    private String perCode;
 
     /**
      *父结点id
@@ -81,12 +81,12 @@ public class SysPermission implements Serializable{
         this.url = url;
     }
 
-    public String getPercode() {
-        return percode;
+    public String getPerCode() {
+        return perCode;
     }
 
-    public void setPercode(String percode) {
-        this.percode = percode;
+    public void setPerCode(String perCode) {
+        this.perCode = perCode;
     }
 
     public Long getParentId() {

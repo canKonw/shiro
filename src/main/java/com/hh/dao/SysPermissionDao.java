@@ -1,12 +1,14 @@
 package com.hh.dao;
 
 import com.hh.entity.SysPermission;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by hh on 15-10-21.
  */
+@Repository
 public class SysPermissionDao extends BaseDao{
 
     /**
