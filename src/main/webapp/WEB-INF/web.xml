@@ -26,5 +26,17 @@
         <servlet-name>springMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!--这里的静态文件处理必须添加  应为设置了拦截器 否则不能请求到静态文件-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+         <servlet-name>default</servlet-name>
+         <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+
   <display-name>Archetype Created Web Application</display-name>
+
 </web-app>
