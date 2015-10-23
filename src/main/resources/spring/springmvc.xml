@@ -19,19 +19,19 @@
     <mvc:resources mapping="/style/**" location="/styles/"></mvc:resources>
     <!--========================================拦截器mvc:interceptors============================================-->
     <!--多个拦截  顺序执行-->
-    <mvc:interceptors>
-        <!--判断用户是否登录-->
+   <!-- <mvc:interceptors>
+        &lt;!&ndash;判断用户是否登录&ndash;&gt;
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.hh.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
-        <!---用户授权权限拦截器-->
+        &lt;!&ndash;-用户授权权限拦截器&ndash;&gt;
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.hh.interceptor.SysPermissionInterceptor"></bean>
         </mvc:interceptor>
 
-    </mvc:interceptors>
+    </mvc:interceptors>-->
     <!--组件扫描-->
     <context:component-scan base-package="com.hh"></context:component-scan>
     <!--定义统一异常处理  抛出异常要进行的处理-->

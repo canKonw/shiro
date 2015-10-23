@@ -43,7 +43,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 配置扫描包的路径 如果要扫描多个包，中间使用半角逗号分隔 -->
-        <property name="basePackage" value="com.hh.mapper"/>
+        <property name="basePackage" value="com.hh.dao"/>
         <!-- 使用sqlSessionFactoryBeanName -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
