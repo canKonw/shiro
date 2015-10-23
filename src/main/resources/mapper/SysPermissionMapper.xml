@@ -6,10 +6,10 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="percode" property="percode" jdbcType="VARCHAR" />
-    <result column="parentid" property="parentid" jdbcType="BIGINT" />
-    <result column="parentids" property="parentids" jdbcType="VARCHAR" />
-    <result column="sortstring" property="sortstring" jdbcType="VARCHAR" />
+    <result column="percode" property="perCode" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentId" jdbcType="BIGINT" />
+    <result column="parentids" property="parentIds" jdbcType="VARCHAR" />
+    <result column="sortstring" property="sortString" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="CHAR" />
   </resultMap>
   <!--基础属性-->
