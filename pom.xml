@@ -163,6 +163,12 @@
           <artifactId>shiro-aspectj</artifactId>
           <version>1.2.4</version>
       </dependency>
+      <!--==========或者直接使用   shiro======-->
+      <!-- <dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-all</artifactId>
+           <version>1.2.4</version>
+       </dependency>-->
   </dependencies>
   <build>
     <finalName>com.hh</finalName>
