@@ -8,7 +8,7 @@ public class Md5Test {
 
     @Test
     public  void getString(){
-        String a = "123456";
+        String a = "123476";
         String b = Md5Util.md5Encode(a);
         System.out.println("---:"+b);
     }
