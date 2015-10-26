@@ -7,6 +7,7 @@ import com.hh.entity.User;
 import com.hh.service.SysPermissionService;
 import com.hh.service.SysUserService;
 import com.hh.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -20,6 +21,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import sun.util.logging.resources.logging;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +32,7 @@ import java.util.List;
  */
 @Component
 public class CustomRealm extends AuthorizingRealm {
+    Logger logger = Logger.getLogger(CustomRealm.class);
     @Autowired
     private SysUserService sysUserService;
     @Autowired
@@ -48,6 +51,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo( AuthenticationToken token) throws AuthenticationException {
+        logger.error("------- i am doGetAuthenticationInfo");
         String userCode = (String) token.getPrincipal();
         SysUser sysUser = sysUserService.getSysUserByCode(userCode);
         if(sysUser==null){
