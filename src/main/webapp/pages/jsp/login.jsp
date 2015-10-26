@@ -52,7 +52,7 @@
 
 </HEAD>
 <BODY style="background: #f6fdff url(${baseurl}images/login/bg1.jpg) repeat-x;">
-	<FORM id="loginform" name="loginform" action="${baseurl}loginController/login"
+	<FORM id="loginform" name="loginform" action="http://localhost:8080/login"
 		method="post">
 		<DIV class="logincon">
 
