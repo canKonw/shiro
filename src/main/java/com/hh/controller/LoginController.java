@@ -38,6 +38,13 @@ public class LoginController {
         //return "redirect:/first";
     }
 
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.invalidate();//sesson失效
+        return "redirect:/items/queryItems";//重定向
+    }
+
     @RequestMapping("/getUser")
     public ModelAndView getUser(HttpServletRequest request,HttpServletResponse response){
         String path = request.getContextPath();
