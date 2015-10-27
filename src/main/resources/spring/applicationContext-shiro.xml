@@ -22,17 +22,18 @@
         <!--登录成功的地址-->
         <property name="successUrl" value="/first"/>
         <!-- 没有权限跳转的地址 -->
-        <property name="unauthorizedUrl" value="/pages/jsp/refuse.jsp" />
+        <property name="unauthorizedUrl" value="/noPermission" />
         <!--过滤定义，从上而下，蒋匿名的anon放最下面-->
         <property name="filterChainDefinitions">
             <value>
                 <!--静态资源通过-->
                 /login = anon
-                /js/** anon
-                /images/** anon
-                /styles/** anon
-                /jsp/** anon
-                /toLogin anon   <!--登录页面的地址-->
+                /js/** = anon
+                /images/** = anon
+                /styles/** = anon
+                /jsp/** = anon
+                /toLogin = anon   <!--登录页面的地址-->
+                /noPermission/** = anon <!--跳转没有权限的页面-->
               <!--  /login anon-->   <!--登录页面的地址-->
 
                 <!--表示所有请求url必须通过认证-->
@@ -83,7 +84,8 @@
     <!--==============================================3、realm===================================================-->
     <!-- Shiro配置,继承自AuthorizingRealm的自定义Realm (解决初始化时的依赖循环问题，通过这里向realm中注入userservice实现)-->
     <bean id="userRealm" class="com.hh.shiro.CustomRealm" >
-      <!-- <property name="authorizationCacheName" value="authorizationcache" />
+      <!--  不适用表单拦截登录时不需要改配置  否则无法登录
+         <property name="authorizationCacheName" value="authorizationcache" />
         <property name="credentialsMatcher" ref="credentialsMatcher" />-->
     </bean>
 
@@ -104,4 +106,11 @@
         <!-- 记住我cookie生效时间30天 -->
         <property name="maxAge" value="2592000" />
     </bean>
+
+    <!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+    <!--<bean id="lifecycleBeanPostProcessor"  class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <bean  class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>-->
 </beans>
