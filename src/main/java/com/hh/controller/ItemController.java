@@ -48,7 +48,7 @@ public class ItemController {
      * @throws Exception
      */
     @RequestMapping("/queryItems")
-    //@RequiresPermissions("item:query")//表示必须拥有“item:query”权限方可执行。
+    @RequiresPermissions("item:query")//表示必须拥有“item:query”权限方可执行
     public ModelAndView queryItems(javax.servlet.http.HttpServletRequest httpServletRequest,
                                    javax.servlet.http.HttpServletResponse httpServletResponse) throws Exception {
         //如果是转发：httpServletRequest的数据是可以共享的
