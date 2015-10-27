@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %><!---使用shiro标签-->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -51,9 +51,9 @@
 			<td>${item.price}</td>
 				<td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${item.detail}</td>
-			<%--<shiro:hasPermission name="item:update">--%>
+			<shiro:hasPermission name="item:update"><!--拥有item:update权才能使用-->
 			<td><a href="${pageContext.request.contextPath }/items/editItems?id=${item.id}">修改</a></td>
-			<%--</shiro:hasPermission>--%>
+			</shiro:hasPermission>
 			<td><a href="${pageContext.request.contextPath }/items/viewItems/${item.id}">查询商品信息</a></td>
 
 		</tr>
