@@ -9,10 +9,7 @@ import com.hh.service.SysUserService;
 import com.hh.service.UserService;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -38,10 +35,10 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private SysPermissionService sysPermissionService;
     // 设置realm的名称
-    @Override
+    /*@Override
     public void setName(String name) {
         super.setName("customRealm");
-    }
+    }*/
 
     /**
      * 进行认证
@@ -55,7 +52,10 @@ public class CustomRealm extends AuthorizingRealm {
         String userCode = (String) token.getPrincipal();
         SysUser sysUser = sysUserService.getSysUserByCode(userCode);
         if(sysUser==null){
-           return null;
+            throw new UnknownAccountException();//没找到帐号
+        }
+        if(Boolean.TRUE.equals(sysUser.getLocked())) {
+            throw new LockedAccountException(); //帐号锁定
         }
         String passWord = sysUser.getPassword();
         String salt = sysUser.getSalt();
@@ -66,9 +66,12 @@ public class CustomRealm extends AuthorizingRealm {
         //获得菜单
         List<SysPermission> menu = sysPermissionService.findMenuListByUserId(sysUser.getId());
         activeUser.setMenus(menu);
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-                activeUser,passWord, ByteSource.Util.bytes(salt),this.getName());
-        return simpleAuthenticationInfo;
+       /* SimpleAuthenticationInfo simpleAuthenticationInfo  = new SimpleAuthenticationInfo(
+                    activeUser,passWord, ByteSource.Util.bytes(salt),this.getName());*/
+        //这里查询到用户的信息后，将用户的username和password放在simpleAuthenticationInfo中，以供submit.login();
+        //new SimpleAuthenticationInfo(对象或则是userName或是对象,password,this.getName());  在这里第一个参数传入对象的时候，在后面可以使用(ActiveUser)SecurityUtils.getSubject().getPrincipal()获得对象
+        SimpleAuthenticationInfo simpleAuthenticationInfo  = new SimpleAuthenticationInfo(activeUser,sysUser.getPassword(),this.getName());
+        return  simpleAuthenticationInfo;
     }
 
 
@@ -79,9 +82,10 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo( PrincipalCollection principals) {
+        logger.error("------- i am doGetAuthorizationInfo");
         //从 principals获取主身份信息
         //将getPrimaryPrincipal方法返回值转为真实身份类型（在上边的doGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo中身份类型），
-        ActiveUser activeUser = (ActiveUser)principals.getPrimaryPrincipal();
+        ActiveUser  activeUser= (ActiveUser)principals.getPrimaryPrincipal();
         //获得所有的权限
         List<SysPermission> permissionList = sysPermissionService.findPermissionListByUserId(activeUser.getUserId());
         List<String> permissions = new ArrayList<String>();
