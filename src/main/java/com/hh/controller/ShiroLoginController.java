@@ -3,7 +3,6 @@ package com.hh.controller;
 import com.hh.Exception.CustomException;
 import com.hh.entity.ActiveUser;
 import com.hh.util.Md5Util;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.PasswordAuthentication;
 
 /**
  * 使用shiro进行登录
