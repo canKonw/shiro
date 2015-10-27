@@ -38,7 +38,8 @@
     <bean id="CustomExceptionResolver" class="com.hh.Exception.CustomExceptionResolver"/>
     <!--注解驱动-->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven><!--对应下面的转化器-->
-
+ <!--   意思是访问"/"重定向到toLogin-->
+    <mvc:view-controller path="/" view-name="redirect:/toLogin"/>
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -54,12 +55,36 @@
             </set>
         </property>
     </bean>
+    <!-- ========================================shrio 否则类中使用shiro注解进行权限判定无效=========================================================== -->
+    <!-- 开启aop，对类代理 -->
+    <aop:config proxy-target-class="true"></aop:config>
+    <!-- 开启shiro注解支持 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
     <!-- ========================================文件上传======================================================== -->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 设置上传文件的最大尺寸为5MB -->
         <property name="maxUploadSize">
             <value>5242880</value>
+        </property>
+    </bean>
+
+
+    <!--=====================对异常进行处理==========================-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->
+        <property name="defaultErrorView" value="error"></property>
+        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
+        <property name="exceptionAttribute" value="ex"></property>
+        <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">refuse</prop>
+                <prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>
+                <!-- 这里还可以继续扩展对不同异常类型的处理 -->
+            </props>
         </property>
     </bean>
 </beans>
