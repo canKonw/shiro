@@ -171,6 +171,6 @@
        </dependency>-->
   </dependencies>
   <build>
-    <finalName>com.hh</finalName>
+    <finalName>shiro</finalName>
   </build>
 </project>
