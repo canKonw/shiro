@@ -18,9 +18,9 @@ public class FirstController {
 	@RequestMapping("/first")
 	public String first(Model model,HttpSession session)throws Exception{
 		//从shiro的session中取出activeUser
-		/*Subject subject= SecurityUtils.getSubject();
-		ActiveUser activeUser=(ActiveUser)subject.getPrincipal();*/
-        ActiveUser activeUser=(ActiveUser)session.getAttribute("activeUser");
+		Subject subject= SecurityUtils.getSubject();
+		ActiveUser activeUser=(ActiveUser)subject.getPrincipal();
+       // ActiveUser activeUser=(ActiveUser)session.getAttribute("activeUser");
 		//通过model传送到页面
 		model.addAttribute("activeUser",activeUser);
 		return "first";
