@@ -42,7 +42,7 @@ public class ShiroLoginController {
        // DisabledAccountException（禁用的帐号）、LockedAccountException（锁定的帐号）、UnknownAccountException（错误的帐号）
        // ExcessiveAttemptsException（登录失败次数过多）、IncorrectCredentialsException （错误的凭证）、ExpiredCredentialsException（过期的凭证）等
         Subject user = SecurityUtils.getSubject();
-        System.out.println("------:"+Md5Util.md5Encode(password));
+        logger.error("------:"+Md5Util.md5Encode(password));
           UsernamePasswordToken token = new UsernamePasswordToken(userName,Md5Util.md5Encode(password));
         token.setRememberMe(true);
         try {
@@ -83,6 +83,7 @@ public class ShiroLoginController {
                 throw  new CustomException("未知错误!");
             }
         }*/
+      /*  可以使用配置文件登录成功跳转页面 但是现在没用*/
         return "redirect:/first";
     }
 
