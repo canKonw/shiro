@@ -50,6 +50,9 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo( AuthenticationToken token) throws AuthenticationException {
         logger.error("------- i am doGetAuthenticationInfo");
         String userCode = (String) token.getPrincipal();
+       /* 或者
+        UsernamePasswordToken token=(UsernamePasswordToken) token;
+        String userCode = token.getUsername();*/
         SysUser sysUser = sysUserService.getSysUserByCode(userCode);
         if(sysUser==null){
             throw new UnknownAccountException();//没找到帐号
@@ -76,7 +79,7 @@ public class CustomRealm extends AuthorizingRealm {
 
 
     /**
-     *     用于授权
+     *     用于授权  在进行需要权限判断的时候会执行该方法
      * @param principals
      * @return
      */
