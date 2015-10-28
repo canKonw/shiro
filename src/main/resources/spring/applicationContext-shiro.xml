@@ -22,27 +22,24 @@
         <!--登录成功的地址-->
         <property name="successUrl" value="/first"/>
         <!-- 没有权限跳转的地址 -->
-        <property name="unauthorizedUrl" value="/noPermission" />
+        <property name="unauthorizedUrl" value="/pages/jsp/refuse.jsp"/><!--暂时发现没有用  使用spring的异常处理-->
         <!--过滤定义，从上而下，蒋匿名的anon放最下面-->
         <property name="filterChainDefinitions">
             <value>
                 <!--静态资源通过-->
                 /login = anon
+                /getValidateCode = anon  <!--验证码-->
                 /js/** = anon
                 /images/** = anon
                 /styles/** = anon
                 /jsp/** = anon
                 /toLogin = anon   <!--登录页面的地址-->
                 /noPermission/** = anon <!--跳转没有权限的页面-->
-              <!--  /login anon-->   <!--登录页面的地址-->
-
                 <!--表示所有请求url必须通过认证-->
                 /**=  authc
                 <!--请求logout，shrio擦除sssion-->
                 /logout=logout
-                <!--表示所有url都可以通过-->
 
-                <!-- /**  anon-->
             </value>
         </property>
         <!-- 自定义filter配置 -->
@@ -55,8 +52,9 @@
     <!-- ==============================================2、安全管理器============================================== -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRealm" />
+       <!--session管理-->
+      <!--  <property name="sessionManager" ref="sessionManager" />-->
         <!--缓存管理-->
-   <!--     <property name="sessionManager" ref="sessionManager" />-->
       <!--  <property name="cacheManager" ref="cacheManager"/>-->
         <!-- 记住我 -->
        <!-- <property name="rememberMeManager" ref="rememberMeManager"/>-->
@@ -74,19 +72,16 @@
     </bean>
     <!-- 自定义form认证过虑器 -->
     <!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
-    <bean id="formAuthenticationFilter" class="com.hh.shiro.FormAuthentication">
-        <!--表单中账户和密码的input框名称-->
+  <!--  <bean id="formAuthenticationFilter" class="com.hh.shiro.FormAuthentication">
+        &lt;!&ndash;表单中账户和密码的input框名称&ndash;&gt;
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
-        <!--记住我input框名称-->
+        &lt;!&ndash;记住我input框名称&ndash;&gt;
         <property name="rememberMeParam" value="rememberMe"/>
-    </bean>
+    </bean>-->
     <!--==============================================3、realm===================================================-->
     <!-- Shiro配置,继承自AuthorizingRealm的自定义Realm (解决初始化时的依赖循环问题，通过这里向realm中注入userservice实现)-->
     <bean id="userRealm" class="com.hh.shiro.CustomRealm" >
-      <!--  不适用表单拦截登录时不需要改配置  否则无法登录
-         <property name="authorizationCacheName" value="authorizationcache" />
-        <property name="credentialsMatcher" ref="credentialsMatcher" />-->
     </bean>
 
     <!--4 凭证匹配器 -->
