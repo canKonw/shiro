@@ -30,17 +30,16 @@ public class ShiroLoginController {
         String rememberMeParam =  request.getParameter("rememberMe");
         boolean isRemberMe =true;
         String randomcode = request.getParameter("randomcode");
-        String validateCode = (String) request.getAttribute("validateCode");
+        String validateCode = (String) request.getSession().getAttribute("verifyCode");
         logger.error("----------userName:"+userName);
         logger.error("----------password:"+password);
         logger.error("----------rememberMeParam:"+rememberMeParam);
         logger.error("----------randomcode:"+randomcode);
         logger.error("----------validateCode:"+validateCode);
-       /* if(!randomcode.equals(validateCode)){
+        if(!randomcode.equals(validateCode)){
             throw  new CustomException("验证码错误");
-        }*/
-       // DisabledAccountException（禁用的帐号）、LockedAccountException（锁定的帐号）、UnknownAccountException（错误的帐号）
-       // ExcessiveAttemptsException（登录失败次数过多）、IncorrectCredentialsException （错误的凭证）、ExpiredCredentialsException（过期的凭证）等
+        }
+
         Subject user = SecurityUtils.getSubject();
         logger.error("------:"+Md5Util.md5Encode(password));
           UsernamePasswordToken token = new UsernamePasswordToken(userName,Md5Util.md5Encode(password));
@@ -67,6 +66,14 @@ public class ShiroLoginController {
         }catch(Exception e){
             throw new CustomException("账号或密码错误！msg:"+e.getMessage());
         }
+        // DisabledAccountException（禁用的帐号）、LockedAccountException（锁定的帐号）、UnknownAccountException（错误的帐号）
+        // ExcessiveAttemptsException（登录失败次数过多）、IncorrectCredentialsException （错误的凭证）、ExpiredCredentialsException（过期的凭证）等
+        //验证是否登录成功
+        if(user.isAuthenticated()){
+            System.out.println("用户[" + userName + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+        }else{
+            token.clear();
+        }
         System.out.println("---------------------login success");
 
      /*   //如果登录失败从request中获取认证异常信息，shrioLoginFailure就是shiro异常类的全限定名
@@ -87,6 +94,12 @@ public class ShiroLoginController {
         return "redirect:/first";
     }
 
+    @RequestMapping("logout")
+    public String loginOut(){
+      Subject subject = SecurityUtils.getSubject();
+      subject.logout();
+      return "redirect:/";
+    }
     @RequestMapping("/toLogin")
     public ModelAndView getUser(HttpServletRequest request,HttpServletResponse response){
         String path = request.getContextPath();
