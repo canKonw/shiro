@@ -46,7 +46,7 @@
 	//刷新验证码
 	function randomcode_refresh(){
 
-		$("#randomcode_img").attr("src","${baseurl}pages/jsp/validatecode.jsp?" + Date());
+		$("#randomcode_img").attr("src","http://localhost:8080/getValidateCode?time="+new Date());
 	}
 </SCRIPT>
 
@@ -83,7 +83,7 @@
 							<TD>验证码：</TD>
 							<TD><input id="randomcode" name="randomcode" size="8" /> <img
 								id="randomcode_img"  alt=""
-								width="56" height="20" align='absMiddle' src="${baseurl}pages/jsp/validatecode.jsp" /> <a
+								width="56" height="20" align='absMiddle' src="http://localhost:8080/getValidateCode" /> <a
 							href="javascript:void(0)"  onclick="randomcode_refresh()" >刷新</a></TD>
 						</TR>
 						<TR>
@@ -103,5 +103,6 @@
 			</DIV>
 		</DIV>
 	</FORM>
+
 </BODY>
 </HTML>
