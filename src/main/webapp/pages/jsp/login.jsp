@@ -84,7 +84,7 @@
 							<TD><input id="randomcode" name="randomcode" size="8" /> <img
 								id="randomcode_img"  alt=""
 								width="56" height="20" align='absMiddle' src="http://localhost:8080/getValidateCode" /> <a
-							href="javascript:void(0)"  onclick="randomcode_refresh()" >刷新</a></TD>
+							href="javascript:void(0)"  onclick="randomcode_refresh()" >刷 新</a></TD>
 						</TR>
 						<TR>
 							<TD></TD>
