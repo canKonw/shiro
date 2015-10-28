@@ -33,11 +33,13 @@
 
     </mvc:interceptors>-->
     <!--组件扫描-->
-    <context:component-scan base-package="com.hh"></context:component-scan>
-    <!--定义统一异常处理  抛出异常要进行的处理-->
-    <bean id="CustomExceptionResolver" class="com.hh.Exception.CustomExceptionResolver"/>
+    <!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config>-->
+     <context:component-scan base-package="com.hh"></context:component-scan>
+
+    <!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
+   <mvc:annotation-driven/>
     <!--注解驱动-->
-    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven><!--对应下面的转化器-->
+   <!-- <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>--><!--对应下面的转化器-->
  <!--   意思是访问"/"重定向到toLogin-->
     <mvc:view-controller path="/" view-name="redirect:/toLogin"/>
     <!--视图解析器-->
@@ -46,9 +48,32 @@
         <property name="prefix" value="/pages/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!--============================================转换器====================================================== -->
+
+    <!--定义统一异常处理  抛出异常要进行的处理  这里与spring的异常处理只能二选一 -->
+    <!--<bean id="myException" class="com.hh.Exception.MyExceptionHandler"/>-->
+    <!--============================================对异常进行处理===========================================-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
+        <property name="exceptionAttribute" value="ex"></property>
+        <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->
+        <property name="exceptionMappings">
+            <props>
+              <prop key="java.lang.NullPointerException">err</prop>
+              <prop key="com.hh.Exception.CustomException">err</prop>
+              <prop key="org.apache.shiro.authz.UnauthorizedException">refuse</prop><!--refush是页面  springmvc扫描的是pags/jsp下**.jsp的页面-->
+                <!-- 这里还可以继续扩展对不同异常类型的处理 -->
+            </props>
+        </property>
+        <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
+        <property name="warnLogCategory" value="WARN"></property>
+        <!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
+         <property name="defaultErrorView" value="err"></property>
+        <!-- 默认HTTP状态码 -->
+          <property name="defaultStatusCode" value="500"></property>
+    </bean>
+    <!--============================================转换器  ====================================================== -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <!-- 转换器 -->
+        <!--转换器  -->
         <property name="converters">
             <set>
                 <bean class="com.hh.controller.converter.CustomDateConverter"/>
@@ -72,19 +97,5 @@
     </bean>
 
 
-    <!--=====================对异常进行处理==========================-->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->
-        <property name="defaultErrorView" value="error"></property>
-        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
-        <property name="exceptionAttribute" value="ex"></property>
-        <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->
-        <property name="exceptionMappings">
-            <props>
-                <prop key="org.apache.shiro.authz.UnauthorizedException">refuse</prop>
-                <prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>
-                <!-- 这里还可以继续扩展对不同异常类型的处理 -->
-            </props>
-        </property>
-    </bean>
+
 </beans>
