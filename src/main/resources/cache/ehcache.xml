@@ -1,0 +1,16 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+	<!--diskStore：缓存数据持久化的目录 地址  -->
+	<diskStore path="F:\ycydevelop\ehcache" />
+	<defaultCache 
+		maxElementsInMemory="600000"
+		maxElementsOnDisk="10000000"
+		eternal="false" 
+		overflowToDisk="false" 
+		diskPersistent="true"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120" 
+		diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+	</defaultCache>
+</ehcache>
