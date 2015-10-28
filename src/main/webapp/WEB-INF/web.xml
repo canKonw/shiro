@@ -63,6 +63,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+
     <!--这里的静态文件处理必须添加  应为设置了拦截器 否则不能请求到静态文件-->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -72,6 +73,21 @@
          <servlet-name>default</servlet-name>
          <url-pattern>*.css</url-pattern>
     </servlet-mapping>
+
+    <!-- 出错页面定义 -->
+
+   <!-- <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/500.jsp</location>
+    </error-page>-->
 
   <display-name>Archetype Created Web Application</display-name>
 
